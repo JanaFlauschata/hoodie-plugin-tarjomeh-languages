@@ -1,0 +1,6 @@
+{
+  "name": "hoodie-plugin-tarjomeh-languages",
+  "description": "Stores languages in read only store",
+  "version": "1.0.0",
+  "main": "worker.js"
+}
