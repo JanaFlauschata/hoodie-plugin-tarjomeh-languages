@@ -4,7 +4,7 @@ function initialImport(db, done) {
     var languages = ['persian', 'german', 'french', 'spanish', 'english'];
 
     languages.forEach(function (language) {
-        db.add('language', {name: language}, function (error) {
+        db.add('language', {id: language, name: language}, function (error) {
             if (error) return console.warn("Failed to add language", language, error)
         });
     });
@@ -12,15 +12,16 @@ function initialImport(db, done) {
     done();
 }
 
+exports.dbName = 'hoodie-plugin-tarjomeh-languages';
+
 module.exports = function (hoodie, done) {
-    exports.dbname = 'hoodie-plugin-tarjomeh-languages';
 
     hoodie.database.findAll(function (error, databases) {
         if (error) return done(error);
 
-        if (databases.indexOf(dbName) == -1) {
+        if (databases.indexOf(exports.dbName) == -1) {
 
-            hoodie.database.add(dbName, function (error, db) {
+            hoodie.database.add(exports.dbName, function (error, db) {
                 if (error) return done(error);
 
                 initialImport(db, function (error) {
